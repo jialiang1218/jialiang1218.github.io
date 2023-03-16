@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>My Introduction</title>
+    <url>/2023/02/27/My%20introduction/</url>
+    <content><![CDATA[<p>Welcome to jl's blog! This is my first post. I will give an
+introduction about myself.</p>
+<h2 id="introduction">Introduction</h2>
+<p>LiJialiang, a student of Sun-Yat-Sen University. I am currently in my
+first year of graduate school. My research direction is Quantum Random
+Number Generator(QRNG).</p>
+<h2 id="theme">Theme</h2>
+<p>I will share my new reading and thoughts about QRNG in this blog. If
+you are also interested in QRNG or your research direction is also QRNG,
+we can discuss it with each others.</p>
+<p>You can contact me by email: mcmeenvintilaso7502@gmail.com</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>论文阅读 —— QRNG中最大化提取的随机性</title>
+    <url>/2023/03/01/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%20%E2%80%94%E2%80%94%20QRNG%E4%B8%AD%E6%9C%80%E5%A4%A7%E5%8C%96%E6%8F%90%E5%8F%96%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%80%A7/</url>
+    <content><![CDATA[<p>以下内容均出自论文<a class="link" href="http://arxiv.org/abs/1411.4512">《Maximization of Extractable
+Randomness in a Quantum Random-Number Generator》 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="一摘要">一、摘要</h2>
+<p>文章主要包括两个内容： 1.
+考虑到经典噪声对QRNG的影响，提出最坏情况条件最小熵（经典噪声被对手控制）和平均条件最小熵（经典噪声只能完全被对手监听）的定义
+2.
+在给定量子经典比的情况下，通过优化ADC的动态范围，实现随机性的最大化提取（最大的条件最小熵）</p>
+<h2 id="二条件最小熵">二、条件最小熵</h2>
+<h3 id="前提条件">1.前提条件</h3>
+<ul>
+<li>量子噪声和经典噪声为高斯分布且相互独立。</li>
+<li>条件概率密度函数：（<span class="math inline">\(\sigma^2_Q =
+1\)</span>）</li>
+</ul>
+<p>离散化的条件概率分布： <span class="math display">\[
+\begin{aligned}
+&amp; P_{M_{\mathrm{dis}} \mid E}\left(m_i \mid e\right) \\
+&amp; = \begin{cases}\int_{-\infty}^{-R+\delta / 2} p_{M \mid E}(m \mid
+e) \mathrm{d} m, &amp; i=i_{\min }, \\
+\int_{m_i-\delta / 2}^{m_i+\delta / 2} p_{M \mid E}(m \mid e) \mathrm{d}
+m, &amp; i_{\min }&lt;i&lt;i_{\max }, \\
+\int_{R-3 \delta / 2}^{\infty} p_{M \mid E}(m \mid e) \mathrm{d} m,
+&amp; i=i_{\max } .\end{cases}
+\end{aligned}
+\]</span></p>
+<p>最大条件概率： <span class="math display">\[
+\begin{aligned}
+&amp; \max _{m_i \in M_{\mathrm{dis}}} P_{M_{\mathrm{dis}} \mid
+E}\left(m_i \mid e\right) \\
+&amp;=\max \left\{\begin{array}{l}
+\frac{1}{2}\left[1-\operatorname{erf}\left(\frac{e+R-\delta /
+2}{\sqrt{2}}\right)\right], \\
+\operatorname{erf}\left(\frac{\delta}{2 \sqrt{2}}\right), \\
+\frac{1}{2}\left[\operatorname{erf}\left(\frac{e-R+3 \delta /
+2}{\sqrt{2}}\right)+1\right],
+\end{array}\right.
+\end{aligned}
+\]</span></p>
+<h3 id="最坏情况条件最小熵">2.最坏情况条件最小熵</h3>
+<p>定义： <span class="math display">\[
+H_{\min }\left(M_{\mathrm{dis}} \mid E\right)=-\log _2\left[\max _{e \in
+\mathbb{R}} \max _{m_i \in M_{\mathrm{dis}}} P_{M_{\mathrm{dis}} \mid
+E}\left(m_i \mid e\right)\right]
+\]</span></p>
+<h3 id="平均条件最小熵">3.平均条件最小熵</h3>
+<p>定义： <span class="math display">\[
+\begin{aligned}
+&amp;\bar{H}_{\text {min }}\left(M_{\text {dis }} \mid E_{\text {dis
+}}\right)=-\log _2 P_{\text {guess }}\left(M_{\text {dis }} \mid
+E_{\text {dis }}\right)
+\end{aligned}
+\]</span></p>
+<p>猜测概率： <span class="math display">\[
+\begin{aligned}
+&amp; P_{\text {guess }}\left(M_{\text {dis }} \mid E_{\text {dis
+}}\right) \\
+&amp; =\left[\sum_{e_j \in E_{\text {dis }}} P_{E_{\text {dis
+}}}\left(e_j\right) \max _{m_i \in M_{\text {dis }}} P_{M_{\text {dis }}
+\mid E_{\text {dis }}}\left(m_i \mid e_j\right)\right],
+\end{aligned}
+\]</span></p>
+<h2 id="三优化adc动态范围">三、优化ADC动态范围</h2>
+<h3 id="前提条件-1">1.前提条件</h3>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; e_{\text{min}}=e_{\text{max}}
+\end{aligned}
+\]</span></p>
+<h3 id="最坏情况下条件最小熵">2.最坏情况下条件最小熵</h3>
+<p><span class="math display">\[
+H_{\min }\left(M_{\mathrm{dis}} \mid E\right)=-\log _2\left[\max
+\left\{\frac{1}{2}\left[\operatorname{erf}\left(\frac{e_{\max }-R+3
+\delta / 2}{\sqrt{2}}\right)+1\right] ;
+\operatorname{erf}\left(\frac{\delta}{2 \sqrt{2}}\right)\right\}\right]
+\]</span></p>
+<h3 id="最优化动态范围">3.最优化动态范围</h3>
+<p><span class="math display">\[
+\frac{1}{2}\left[\operatorname{erf}\left(\frac{e_{\max }-R+3 \delta /
+2}{\sqrt{2}}\right)+1\right]=\operatorname{erf}\left(\frac{\delta}{2
+\sqrt{2}}\right)
+\]</span></p>
+<h2 id="四展望">四、展望</h2>
+<ol type="1">
+<li>分析最坏情况条件最小熵的平滑</li>
+<li>考虑潜在的量子边信息</li>
+<li>信息论和密码学混合的随机性提取器</li>
+</ol>
+]]></content>
+  </entry>
+</search>
